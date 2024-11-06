@@ -1,16 +1,38 @@
 grammar TMNH;
 
-prog:	'int main()' '{' expr '}' EOF;
+prog: statement;
 
-endExpr: expr ';' ;
+statement
+	: VARIABLE assign_op expr
+	; 
 
-expr:	assignment
-	| expr ('+'|'-') expr
-	| expr ('*'|'/') expr
-	| INT ;
+expr
+	: expr math_op expr 
+	| STRING
+	| NUMBER
+	;	
 
-INT:	[0-9]+;
-VARNAME: [a-zA-Z]+;
-assignment:	VARNAME '=' expr ';';
+math_op
+	: '+'
+	| '-'
+	| '*'
+	| '/'
+	| '%'
+	;
 
-WS:	[ \t\r\n]+ -> skip;
+assign_op
+	: '+='
+	| '-='
+	| '*='
+	| '/='
+	| '='
+	;
+
+
+VARIABLE
+	: [a-zA-Z_][a-zA-Z_0-9]*;
+NUMBER
+	: [0-9]+;
+STRING  
+	: '"' (~['"\r\n])* '"';
+

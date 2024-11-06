@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "antlr4 -Dlanguage=TypeScript -o generated TMNH.g4 || java -jar /usr/local/lib/antlr-4.13.2-complete.jar -Dlanguage=TypeScript -o generated TMNH.g4"
+  },
   "dependencies": {
     "antlr4": "^4.13.2"
   }

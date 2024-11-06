@@ -3,6 +3,9 @@
     "build": "antlr -Dlanguage=TypeScript -o generated TMNH.g4 || java -jar /usr/local/lib/antlr-4.13.2-complete.jar -Dlanguage=TypeScript -o generated TMNH.g4"
   },
   "dependencies": {
-    "antlr4": "^4.13.2"
+    "antlr4": "^4.13.2",
+    "antlr4ts": "^0.5.0-alpha.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   }
 }

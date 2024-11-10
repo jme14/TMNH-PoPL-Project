@@ -36,5 +36,5 @@ NUMBER
 STRING  
 	: '"' (~['"\r\n])* '"';
 WHITESPACE
-	: [ \n\t\r]+ -> skip;
+	: [ \n\r]+ -> skip;
 

@@ -35,4 +35,6 @@ NUMBER
 	: [0-9]+;
 STRING  
 	: '"' (~['"\r\n])* '"';
+WHITESPACE
+	: [ \n\t\r]+ -> skip;
 

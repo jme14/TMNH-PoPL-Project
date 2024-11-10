@@ -1,8 +1,8 @@
 ## Members
-Noah Fouts
-Hannah Christ
-Trey Williams
-Makayla Morton
+*Noah Fouts
+*Hannah Christ
+*Trey Williams
+*Makayla Morton
 
 
 ## About the Project

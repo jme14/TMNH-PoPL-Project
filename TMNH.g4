@@ -38,3 +38,17 @@ STRING
 WHITESPACE
 	: [ \n\r]+ -> skip;
 
+
+
+
+conditional_op
+	: '<'
+	| '<='
+	| '>'
+	| '>='
+	| '=='
+	| '!='
+	| 'and'
+	| 'or'
+	| 'not'
+	;

@@ -67,3 +67,14 @@ COLON
 	: ':';
 WHITESPACE
 	: [ \n\r]+ -> skip;
+	
+
+IF
+	:'if'
+	;
+ELIF
+	:'elif'
+	;
+ELSE
+	:'else'
+	;

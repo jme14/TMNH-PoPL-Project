@@ -19,7 +19,7 @@ public class TMNHParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, VARIABLE=23, NUMBER=24, 
-		STRING=25, WHITESPACE=26;
+		STRING=25, COLON=26, WHITESPACE=27;
 	public static final int
 		RULE_prog = 0, RULE_statement = 1, RULE_arithmetic = 2, RULE_expr = 3, 
 		RULE_array = 4, RULE_list = 5, RULE_math_op = 6, RULE_assign_op = 7, RULE_conditional_op = 8;
@@ -35,7 +35,7 @@ public class TMNHParser extends Parser {
 		return new String[] {
 			null, "'['", "']'", "','", "'+'", "'-'", "'*'", "'/'", "'%'", "'+='", 
 			"'-='", "'*='", "'/='", "'='", "'<'", "'<='", "'>'", "'>='", "'=='", 
-			"'!='", "'and'", "'or'", "'not'"
+			"'!='", "'and'", "'or'", "'not'", null, null, null, "':'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -43,7 +43,7 @@ public class TMNHParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, "VARIABLE", 
-			"NUMBER", "STRING", "WHITESPACE"
+			"NUMBER", "STRING", "COLON", "WHITESPACE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -616,7 +616,7 @@ public class TMNHParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u001aU\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u001bU\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0001\u0000\u0004\u0000\u0014\b\u0000\u000b\u0000\f\u0000\u0015"+

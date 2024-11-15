@@ -63,5 +63,7 @@ STRING
     :   '"' (~['"\r\n])* '"'   // double quotes
     |   '\'' (~['\r\n])* '\''   // single quotes
     ;
+COLON
+	: ':';
 WHITESPACE
 	: [ \n\r]+ -> skip;

@@ -6,10 +6,17 @@ statement
 	: VARIABLE assign_op expr
 	; 
 
+arithmetic
+	: VARIABLE assign_op expr math_op expr
+	| VARIABLE assign_op expr math_op VARIABLE
+	| VARIABLE assign_op expr
+	;
+
 expr
 	: expr math_op expr 
 	| STRING
 	| NUMBER
+	| VARIABLE
 	;	
 
 math_op

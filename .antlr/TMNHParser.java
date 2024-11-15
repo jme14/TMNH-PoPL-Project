@@ -1,4 +1,4 @@
-// Generated from c:/Users/nfout/OneDrive/Desktop/MIZZOU/FALL2024/Popl/GroupProject/Attempt_03/TMNH-PoPL-Project/TMNH.g4 by ANTLR 4.13.1
+// Generated from c:/Users/nfout/OneDrive/Desktop/POPL/TMNH-PoPL-Project/TMNH.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,12 +17,14 @@ public class TMNHParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, VARIABLE=11, NUMBER=12, STRING=13;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
+		T__17=18, T__18=19, VARIABLE=20, NUMBER=21, STRING=22, WHITESPACE=23;
 	public static final int
-		RULE_prog = 0, RULE_statement = 1, RULE_expr = 2, RULE_math_op = 3, RULE_assign_op = 4;
+		RULE_prog = 0, RULE_statement = 1, RULE_expr = 2, RULE_math_op = 3, RULE_assign_op = 4, 
+		RULE_conditional_op = 5;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"prog", "statement", "expr", "math_op", "assign_op"
+			"prog", "statement", "expr", "math_op", "assign_op", "conditional_op"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -30,14 +32,16 @@ public class TMNHParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'+'", "'-'", "'*'", "'/'", "'%'", "'+='", "'-='", "'*='", "'/='", 
-			"'='"
+			"'='", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'and'", "'or'", 
+			"'not'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "VARIABLE", 
-			"NUMBER", "STRING"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, "VARIABLE", "NUMBER", 
+			"STRING", "WHITESPACE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -93,31 +97,39 @@ public class TMNHParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgContext extends ParserRuleContext {
-		public StatementContext statement() {
-			return getRuleContext(StatementContext.class,0);
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
 		}
 		public ProgContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_prog; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).enterProg(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).exitProg(this);
-		}
 	}
 
 	public final ProgContext prog() throws RecognitionException {
 		ProgContext _localctx = new ProgContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_prog);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(10);
-			statement();
+			setState(13); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(12);
+				statement();
+				}
+				}
+				setState(15); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==VARIABLE );
 			}
 		}
 		catch (RecognitionException re) {
@@ -144,14 +156,6 @@ public class TMNHParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).exitStatement(this);
-		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -160,11 +164,11 @@ public class TMNHParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(12);
+			setState(17);
 			match(VARIABLE);
-			setState(13);
+			setState(18);
 			assign_op();
-			setState(14);
+			setState(19);
 			expr(0);
 			}
 		}
@@ -196,14 +200,6 @@ public class TMNHParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).enterExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).exitExpr(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -221,18 +217,18 @@ public class TMNHParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(19);
+			setState(24);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING:
 				{
-				setState(17);
+				setState(22);
 				match(STRING);
 				}
 				break;
 			case NUMBER:
 				{
-				setState(18);
+				setState(23);
 				match(NUMBER);
 				}
 				break;
@@ -240,9 +236,9 @@ public class TMNHParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(27);
+			setState(32);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
@@ -251,18 +247,18 @@ public class TMNHParser extends Parser {
 					{
 					_localctx = new ExprContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_expr);
-					setState(21);
+					setState(26);
 					if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-					setState(22);
+					setState(27);
 					math_op();
-					setState(23);
+					setState(28);
 					expr(4);
 					}
 					} 
 				}
-				setState(29);
+				setState(34);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
 			}
 		}
@@ -283,14 +279,6 @@ public class TMNHParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_math_op; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).enterMath_op(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).exitMath_op(this);
-		}
 	}
 
 	public final Math_opContext math_op() throws RecognitionException {
@@ -300,7 +288,7 @@ public class TMNHParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(35);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 62L) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -329,14 +317,6 @@ public class TMNHParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assign_op; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).enterAssign_op(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TMNHListener ) ((TMNHListener)listener).exitAssign_op(this);
-		}
 	}
 
 	public final Assign_opContext assign_op() throws RecognitionException {
@@ -346,9 +326,47 @@ public class TMNHParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
+			setState(37);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1984L) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Conditional_opContext extends ParserRuleContext {
+		public Conditional_opContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditional_op; }
+	}
+
+	public final Conditional_opContext conditional_op() throws RecognitionException {
+		Conditional_opContext _localctx = new Conditional_opContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_conditional_op);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(39);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1046528L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -385,29 +403,33 @@ public class TMNHParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\r#\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
-		"\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002\u0014\b\u0002\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0005\u0002\u001a\b\u0002\n\u0002\f\u0002"+
-		"\u001d\t\u0002\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0000\u0001\u0004\u0005\u0000\u0002\u0004\u0006\b\u0000\u0002\u0001\u0000"+
-		"\u0001\u0005\u0001\u0000\u0006\n\u001f\u0000\n\u0001\u0000\u0000\u0000"+
-		"\u0002\f\u0001\u0000\u0000\u0000\u0004\u0013\u0001\u0000\u0000\u0000\u0006"+
-		"\u001e\u0001\u0000\u0000\u0000\b \u0001\u0000\u0000\u0000\n\u000b\u0003"+
-		"\u0002\u0001\u0000\u000b\u0001\u0001\u0000\u0000\u0000\f\r\u0005\u000b"+
-		"\u0000\u0000\r\u000e\u0003\b\u0004\u0000\u000e\u000f\u0003\u0004\u0002"+
-		"\u0000\u000f\u0003\u0001\u0000\u0000\u0000\u0010\u0011\u0006\u0002\uffff"+
-		"\uffff\u0000\u0011\u0014\u0005\r\u0000\u0000\u0012\u0014\u0005\f\u0000"+
-		"\u0000\u0013\u0010\u0001\u0000\u0000\u0000\u0013\u0012\u0001\u0000\u0000"+
-		"\u0000\u0014\u001b\u0001\u0000\u0000\u0000\u0015\u0016\n\u0003\u0000\u0000"+
-		"\u0016\u0017\u0003\u0006\u0003\u0000\u0017\u0018\u0003\u0004\u0002\u0004"+
-		"\u0018\u001a\u0001\u0000\u0000\u0000\u0019\u0015\u0001\u0000\u0000\u0000"+
-		"\u001a\u001d\u0001\u0000\u0000\u0000\u001b\u0019\u0001\u0000\u0000\u0000"+
-		"\u001b\u001c\u0001\u0000\u0000\u0000\u001c\u0005\u0001\u0000\u0000\u0000"+
-		"\u001d\u001b\u0001\u0000\u0000\u0000\u001e\u001f\u0007\u0000\u0000\u0000"+
-		"\u001f\u0007\u0001\u0000\u0000\u0000 !\u0007\u0001\u0000\u0000!\t\u0001"+
-		"\u0000\u0000\u0000\u0002\u0013\u001b";
+		"\u0004\u0001\u0017*\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0001\u0000\u0004\u0000\u000e\b\u0000\u000b\u0000\f"+
+		"\u0000\u000f\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0003\u0002\u0019\b\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0005\u0002\u001f\b\u0002\n\u0002\f\u0002\"\t"+
+		"\u0002\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
+		"\u0005\u0001\u0005\u0000\u0001\u0004\u0006\u0000\u0002\u0004\u0006\b\n"+
+		"\u0000\u0003\u0001\u0000\u0001\u0005\u0001\u0000\u0006\n\u0001\u0000\u000b"+
+		"\u0013&\u0000\r\u0001\u0000\u0000\u0000\u0002\u0011\u0001\u0000\u0000"+
+		"\u0000\u0004\u0018\u0001\u0000\u0000\u0000\u0006#\u0001\u0000\u0000\u0000"+
+		"\b%\u0001\u0000\u0000\u0000\n\'\u0001\u0000\u0000\u0000\f\u000e\u0003"+
+		"\u0002\u0001\u0000\r\f\u0001\u0000\u0000\u0000\u000e\u000f\u0001\u0000"+
+		"\u0000\u0000\u000f\r\u0001\u0000\u0000\u0000\u000f\u0010\u0001\u0000\u0000"+
+		"\u0000\u0010\u0001\u0001\u0000\u0000\u0000\u0011\u0012\u0005\u0014\u0000"+
+		"\u0000\u0012\u0013\u0003\b\u0004\u0000\u0013\u0014\u0003\u0004\u0002\u0000"+
+		"\u0014\u0003\u0001\u0000\u0000\u0000\u0015\u0016\u0006\u0002\uffff\uffff"+
+		"\u0000\u0016\u0019\u0005\u0016\u0000\u0000\u0017\u0019\u0005\u0015\u0000"+
+		"\u0000\u0018\u0015\u0001\u0000\u0000\u0000\u0018\u0017\u0001\u0000\u0000"+
+		"\u0000\u0019 \u0001\u0000\u0000\u0000\u001a\u001b\n\u0003\u0000\u0000"+
+		"\u001b\u001c\u0003\u0006\u0003\u0000\u001c\u001d\u0003\u0004\u0002\u0004"+
+		"\u001d\u001f\u0001\u0000\u0000\u0000\u001e\u001a\u0001\u0000\u0000\u0000"+
+		"\u001f\"\u0001\u0000\u0000\u0000 \u001e\u0001\u0000\u0000\u0000 !\u0001"+
+		"\u0000\u0000\u0000!\u0005\u0001\u0000\u0000\u0000\" \u0001\u0000\u0000"+
+		"\u0000#$\u0007\u0000\u0000\u0000$\u0007\u0001\u0000\u0000\u0000%&\u0007"+
+		"\u0001\u0000\u0000&\t\u0001\u0000\u0000\u0000\'(\u0007\u0002\u0000\u0000"+
+		"(\u000b\u0001\u0000\u0000\u0000\u0003\u000f\u0018 ";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

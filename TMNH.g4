@@ -1,6 +1,6 @@
 grammar TMNH;
 
-prog: statement;
+prog: statement+;
 
 statement
 	: VARIABLE assign_op expr
@@ -28,19 +28,6 @@ assign_op
 	| '='
 	;
 
-
-VARIABLE
-	: [a-zA-Z_][a-zA-Z_0-9]*;
-NUMBER
-	: [0-9]+;
-STRING  
-	: '"' (~['"\r\n])* '"';
-WHITESPACE
-	: [ \n\r]+ -> skip;
-
-
-
-
 conditional_op
 	: '<'
 	| '<='
@@ -52,3 +39,12 @@ conditional_op
 	| 'or'
 	| 'not'
 	;
+
+VARIABLE
+	: [a-zA-Z_][a-zA-Z_0-9]*;
+NUMBER
+	: [0-9]+('.'[0-9]+)?;
+STRING  
+	: '"' (~['"\r\n])* '"';
+WHITESPACE
+	: [ \n\r]+ -> skip;

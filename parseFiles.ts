@@ -3,7 +3,7 @@ import { CharStreams, CommonTokenStream } from "antlr4ts";
 import { TMNHLexer } from "./generated/TMNHLexer";
 import { TMNHParser } from "./generated/TMNHParser";
 
-const input = fs.readFileSync("project_deliverable_1.py", "utf-8");
+const input = fs.readFileSync("project_deliverable_2.py", "utf-8");
 const charStream = CharStreams.fromString(input)
 const lexer = new TMNHLexer(charStream);
 const tokenStream = new CommonTokenStream(lexer);

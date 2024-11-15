@@ -4,6 +4,7 @@ prog: statement+;
 
 statement
 	: VARIABLE assign_op expr
+	| array
 	; 
 
 arithmetic
@@ -17,7 +18,14 @@ expr
 	| STRING
 	| NUMBER
 	| VARIABLE
+	| array
 	;	
+
+array
+	: VARIABLE assign_op '[' list ']';
+
+list
+	: expr (',' expr)*;
 
 math_op
 	: '+'
@@ -51,7 +59,9 @@ VARIABLE
 	: [a-zA-Z_][a-zA-Z_0-9]*;
 NUMBER
 	: [0-9]+('.'[0-9]+)?;
-STRING  
-	: '"' (~['"\r\n])* '"';
+STRING
+    :   '"' (~['"\r\n])* '"'   // double quotes
+    |   '\'' (~['\r\n])* '\''   // single quotes
+    ;
 WHITESPACE
 	: [ \n\r]+ -> skip;

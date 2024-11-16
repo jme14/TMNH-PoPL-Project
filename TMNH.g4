@@ -62,9 +62,8 @@ conditional_op
 	| '!='
 	;
 
-
 // handle if block logic
-expression: '('? ('not')? (logic_value (logic_operators logic_value)*) ')'? (('and'|'or') '('? expression ')'?)*;
+expression: '('? ('not')? (expr (conditional_op expr)*) ')'? (('and'|'or') '('? expression ')'?)*;
 scoped_code: ((TAB+)(block|line))+;
 if_statement
     : ((IF expression (':')) EOL 
@@ -75,22 +74,6 @@ elif_statement
     | (ELIF ('(') expression ('):')) EOL) scoped_code
     ;
 else_statement: ELSE COLON EOL scoped_code;
-
-// logic sets
-logic_operators
-    : '=='
-    | '!='
-    | '<='
-    | '>='
-    | '<'
-    | '>'
-    ;
-logic_value
-    : VARIABLE
-    | NUMBER
-    | STRING
-    | arithmetic
-    ;
 
 // conditional block reqs
 IF: 'if';

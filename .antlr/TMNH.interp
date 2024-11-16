@@ -72,7 +72,13 @@ STRING
 TAB
 EOL
 COLON
+AND
+OR
+NOT
 WHITESPACE
+IF
+ELIF
+ELSE
 
 rule names:
 prog
@@ -82,9 +88,16 @@ line
 statement
 assignment
 arithmetic
+logical_expr
 expr
 array
 list
+conditional
+condition
+function_def
+parameters
+function_call
+arguments
 math_op
 assign_op
 conditional_op

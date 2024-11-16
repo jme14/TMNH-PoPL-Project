@@ -56,15 +56,28 @@ VARIABLE
 NUMBER
 STRING
 COLON
+AND
+OR
+NOT
 WHITESPACE
+IF
+ELIF
+ELSE
 
 rule names:
 prog
 statement
 arithmetic
+logical_expr
 expr
 array
 list
+conditional
+condition
+function_def
+parameters
+function_call
+arguments
 math_op
 assign_op
 conditional_op

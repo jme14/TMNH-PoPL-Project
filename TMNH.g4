@@ -3,100 +3,100 @@ grammar TMNH;
 prog: statement+;
 
 statement
-	: VARIABLE assign_op expr SEMICOLON
-	| array SEMICOLON
-    | logical_expr SEMICOLON
-	| conditional
-	| function_def
-	| function_call SEMICOLON
-	; 
+    : VARIABLE assign_op expr NEWLINE
+    | array NEWLINE
+    | conditional NEWLINE
+    | function_def NEWLINE
+    | function_call NEWLINE
+    ;
 
 arithmetic
-	: VARIABLE assign_op expr math_op expr
-	| VARIABLE assign_op expr math_op VARIABLE
-	| VARIABLE assign_op expr
-	;
-
-logical_expr
-    : expr AND expr
-    | expr OR expr
-    | NOT expr
+    : VARIABLE assign_op expr math_op expr
+    | VARIABLE assign_op expr math_op VARIABLE
+    | VARIABLE assign_op expr
     ;
 
 expr
-	: expr math_op expr 
-	| STRING
-	| NUMBER
-	| VARIABLE
-	| array
-	| function_call
-    | logical_expr
-	;	
+    : expr math_op expr 
+    | STRING
+    | NUMBER
+    | VARIABLE
+    | array
+    | function_call
+    ;
 
 array
-	: VARIABLE assign_op '[' list ']';
+    : VARIABLE assign_op '[' list ']';
 
 list
-	: expr (',' expr)*;
+    : expr (',' expr)*;
 
 conditional
-    : IF '(' logical_expr ')' block (ELIF '(' logical_expr ')' block)* (ELSE block)?
+    : IF condition* COLON NEWLINE WHITESPACE block
+    | IF '(' condition* ')' COLON NEWLINE WHITESPACE block
+      (ELIF condition* COLON NEWLINE WHITESPACE block)*
+      (ELSE COLON NEWLINE WHITESPACE block)?
     ;
-
-
-condition
-	: expr conditional_op expr
-	| NOT expr
-	| expr AND expr
-	| expr OR expr
-	;
-
-function_def
-	: VARIABLE '(' parameters? ')' block
-	;
-
-parameters
-	: VARIABLE (',' VARIABLE)*
-	;
-
-function_call
-	: VARIABLE '(' arguments? ')'
-	;
-
-arguments
-	: expr (',' expr)*;
 
 block
-    : '{' statement* '}'
+    : statement+;
+
+condition
+    : condition AND condition
+    | condition OR condition
+    | NOT condition
+    | expr conditional_op expr
     ;
 
+function_def
+    : VARIABLE '(' parameters? ')' COLON NEWLINE
+    ;
+
+parameters
+    : VARIABLE (',' VARIABLE)*;
+
+function_call
+    : VARIABLE '(' arguments? ')' NEWLINE
+    ;
+
+arguments
+    : expr (',' expr)*;
+
 math_op
-	: '+'
-	| '-'
-	| '*'
-	| '/'
-	| '%'
-	;
+    : '+'
+    | '-'
+    | '*'
+    | '/'
+    | '%'
+    ;
 
 assign_op
-	: '+='
-	| '-='
-	| '*='
-	| '/='
-	| '='
-	;
+    : '+='
+    | '-='
+    | '*='
+    | '/='
+    | '='
+    ;
 
 conditional_op
-	: '<'
-	| '<='
-	| '>'
-	| '>='
-	| '=='
-	| '!='
-	;
+    : '<'
+    | '<='
+    | '>'
+    | '>='
+    | '=='
+    | '!='
+    ;
 
-SEMICOLON
-    : ';';
+IF
+    : 'if'
+    ;
+ELIF
+    : 'elif'
+    ;
+ELSE
+    : 'else'
+    ;
+
 AND
     : 'and';
 OR
@@ -105,25 +105,23 @@ NOT
     : 'not';
 
 VARIABLE
-	: [a-zA-Z_][a-zA-Z_0-9]*;
+    : [a-zA-Z_][a-zA-Z_0-9]*;
 NUMBER
-	: [0-9]+('.'[0-9]+)?;
+    : [0-9]+('.'[0-9]+)?;
 STRING
     :   '"' (~['"\r\n])* '"'   // double quotes
     |   '\'' (~['\r\n])* '\''   // single quotes
     ;
 COLON
-	: ':';
-WHITESPACE
-	: [ \n\r]+ -> skip;
-	
+    : ':';
+NEWLINE
+    : '\r'? '\n';
 
-IF
-	:'if'
-	;
-ELIF
-	:'elif'
-	;
-ELSE
-	:'else'
-	;
+INDENT
+    : [ \t]+ -> channel(HIDDEN);
+
+DEDENT
+    : [ \t]+ -> channel(HIDDEN);
+
+WHITESPACE
+    : [ \t\r]+ -> channel(HIDDEN);

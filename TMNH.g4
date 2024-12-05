@@ -4,9 +4,17 @@ grammar TMNH;
 prog: (block | line)* EOF; // deliverables are either a block or a line of code !!
 
 // upper logic
-block: if_else_block;
+block: (if_else_block | for_loop | while_loop);
 
 if_else_block: if_statement ((TAB+)* elif_statement)* ((TAB+)* else_statement)?;
+
+while_loop
+	: (WHILE expression (':') line)
+    | (WHILE expression (':') EOL scoped_code ); 
+
+for_loop
+	: (FOR VARIABLE IN iteratable (':') line)
+	| (FOR VARIABLE IN iteratable (':') EOL scoped_code);
 
 line: statement? EOL;
 
@@ -61,6 +69,8 @@ conditional_op
 	| '=='
 	| '!='
 	;
+// handle for loop logic 
+iteratable: (array | STRING | VARIABLE);
 
 // handle if block logic
 expression: '('? ('not')? (expr (conditional_op expr)*) ')'? (('and'|'or') '('? expression ')'?)*;
@@ -74,6 +84,11 @@ elif_statement
     | (ELIF ('(') expression ('):')) EOL) scoped_code
     ;
 else_statement: ELSE COLON EOL scoped_code;
+
+// loop block reqs 
+WHILE: 'while';
+FOR: 'for';
+IN: 'in';
 
 // conditional block reqs
 IF: 'if';

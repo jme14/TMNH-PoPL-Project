@@ -1,7 +1,7 @@
 grammar TMNH;
 
 // program start 'prog'
-prog: (block | line)* EOF; // deliverables are either a block or a line of code !!
+prog: (block | line)* (EOF); // deliverables are either a block or a line of code !!
 
 // upper logic
 block: (if_else_block | for_loop | while_loop);
@@ -16,13 +16,13 @@ for_loop
 	: (FOR VARIABLE IN iteratable (':') line)
 	| (FOR VARIABLE IN iteratable (':') EOL scoped_code);
 
-line: statement? EOL;
+line: statement (EOL | EOF)?;
 
 statement
-	: arithmetic
+    : comment
+	| arithmetic
     | assignment
 	| array
-	| comment
 	; 
 
 // comments!
@@ -80,7 +80,7 @@ iteratable: (array | STRING | VARIABLE);
 
 // handle if block logic
 expression: '('? ('not')? (expr (conditional_op expr)*) ')'? (('and'|'or') '('? expression ')'?)*;
-scoped_code: ((TAB+)(block|line))+;
+scoped_code: ((TAB+)(block|line|comment))+;
 if_statement
     : ((IF expression (':')) EOL 
     | (IF ('(') expression ('):')) EOL) scoped_code

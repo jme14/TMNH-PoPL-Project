@@ -22,7 +22,13 @@ statement
 	: arithmetic
     | assignment
 	| array
+	| comment
 	; 
+
+// comments!
+comment
+	: ('#' .*? EOL)
+	| (ML_COMMENT_MARKER (ANY_TEXT) ML_COMMENT_MARKER);
 
 assignment: VARIABLE assign_op expr;
 
@@ -116,3 +122,6 @@ EOL: [\n\r]+;
 COLON: ':';
 WHITESPACE: [ ]+? -> skip;
 
+// comments
+ML_COMMENT_MARKER: '\'\'\'';
+ANY_TEXT: ~[\r\n];
